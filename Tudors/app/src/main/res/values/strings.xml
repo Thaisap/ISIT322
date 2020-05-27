@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">Tudors</string>
+    <string name="app_name">Welcome to Tudors! We are here to help you</string>
+    <string name="passwordInput"> Enter Password </string>
+    <string name="usernameInput"> Enter Username</string>
+    <string name="btnLogin"> Login </string>
+    <string name="btnCreateAccount"> Create Account</string>
+    <string name="new_to_tudor">New To Tudor?</string>
+    <string name="forgotInfo">Forgot Username/Password</string>
 </resources>
