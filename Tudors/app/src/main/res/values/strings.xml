@@ -6,4 +6,17 @@
     <string name="btnCreateAccount"> Create Account</string>
     <string name="new_to_tudor">New To Tudor?</string>
     <string name="forgotInfo">Forgot Username/Password</string>
+    <string name="subject">Subject</string>
+    <string name="location">Location</string>
+    <string name="your_location">Your Location</string>
+    <string name="use_gps_for_location">Use GPS for Location</string>
+    <string name="btnEditProfile">Edit Profile</string>
+    <string name="btnFindMatches">Find Matches</string>
+    <!--Temporary Subjects-->
+    <string-array name="subjects_array">
+        <item>Math</item>
+        <item>Physics</item>
+        <item>History</item>
+        <item>English</item>
+    </string-array>
 </resources>
