@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="250dp"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".ScrollingActivityNewUserScreen"
+    tools:showIn="@layout/activity_scrolling_new_user_screen">
+
+    <LinearLayout
+        android:id="@+id/new_user_linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/newUserNameEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/enter_your_name"
+            android:importantForAutofill="no"
+            android:inputType="textPersonName"
+            android:singleLine="true"
+            android:text="@string/name" />
+
+        <EditText
+            android:id="@+id/newUserPasswordEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/enter_your_password"
+            android:importantForAutofill="no"
+            android:inputType="textVisiblePassword"
+            android:singleLine="true"
+            android:text="@string/password" />
+
+        <EditText
+            android:id="@+id/newUserLocationEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/city_or_town"
+            android:inputType="textPostalAddress"
+            android:singleLine="true"
+            android:text="@string/city_or_town"
+            android:importantForAutofill="no" />
+
+        <EditText
+            android:id="@+id/newUserPhoneEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/telephone"
+            android:importantForAutofill="no"
+            android:inputType="phone"
+            android:singleLine="true"
+            android:text="@string/telephone" />
+
+        <EditText
+            android:id="@+id/newUserEmailEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/email"
+            android:importantForAutofill="no"
+            android:inputType="textEmailAddress"
+            android:singleLine="true"
+            android:text="@string/email" />
+
+        <TextView
+            android:id="@+id/newUserSubjectTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/choose_a_subject"
+            android:textAlignment="center"
+            android:textColor="@color/design_default_color_on_secondary"
+            android:textSize="18sp" />
+
+        <Spinner
+            android:id="@+id/newUserSubjectSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:spinnerMode="dropdown" />
+
+        <View
+            android:id="@+id/newUserDivider"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp"
+            android:background="?android:attr/listDivider" />
+
+        <TextView
+            android:id="@+id/newUserRoleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/select_your_role"
+            android:textAlignment="center"
+            android:textColor="@color/design_default_color_on_secondary"
+            android:textSize="18sp" />
+
+        <RadioGroup
+            android:id="@+id/newUserRadioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <RadioButton
+                android:id="@+id/newUserStudentRadioButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/student"
+                android:textColor="@color/design_default_color_on_secondary"
+                android:textSize="18sp" />
+
+            <RadioButton
+                android:id="@+id/newUserTutorRadioButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/tutor"
+                android:textColor="@color/design_default_color_on_secondary"
+                android:textSize="18sp" />
+
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/newUserSaveButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="@android:color/holo_blue_dark"
+            android:text="@string/save"
+            android:textAlignment="center"
+            android:textColor="@color/design_default_color_on_secondary"
+            android:textSize="18sp" />
+
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
