@@ -41,7 +41,7 @@
         android:layout_width="230dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="250dp"/>
+        android:layout_marginTop="240dp"/>
 
     <TextView
         android:id="@+id/textViewLocation"
@@ -64,7 +64,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="330dp"
+        android:layout_marginTop="320dp"
         android:hint="@string/your_location"
         android:text=""
         android:textAlignment="center"
