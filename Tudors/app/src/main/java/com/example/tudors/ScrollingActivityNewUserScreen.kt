@@ -27,12 +27,12 @@ class ScrollingActivityNewUserScreen : AppCompatActivity(), AdapterView.OnItemSe
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
         // Another interface callback
-        TODO("Not yet implemented")
+        // TO DO("Not yet implemented")
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         // An item was selected. You can retrieve the selected item using
         // parent.getItemAtPosition(pos)
-        TODO("Not yet implemented")
+        // TO DO("Not yet implemented")
     }
 }
