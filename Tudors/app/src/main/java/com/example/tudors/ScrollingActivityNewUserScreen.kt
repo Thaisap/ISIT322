@@ -6,14 +6,18 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import com.example.tudors.databinding.ContentScrollingActivityNewUserScreenBinding
 
 class ScrollingActivityNewUserScreen : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
+    private lateinit var binding: ContentScrollingActivityNewUserScreenBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_scrolling_new_user_screen)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_scrolling_new_user_screen)
 
-        val spinner: Spinner = findViewById(R.id.newUserSubjectSpinner)
+        val spinner: Spinner = binding.newUserSubjectSpinner
         spinner.onItemSelectedListener = this
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter.createFromResource(this, R.array.subjects_array,
@@ -31,8 +35,7 @@ class ScrollingActivityNewUserScreen : AppCompatActivity(), AdapterView.OnItemSe
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        // An item was selected. You can retrieve the selected item using
-        // parent.getItemAtPosition(pos)
-        // TO DO("Not yet implemented")
+        // An item was selected. Save it.
+        var subjectSelected : String = parent!!.getItemAtPosition(position).toString()
     }
 }
