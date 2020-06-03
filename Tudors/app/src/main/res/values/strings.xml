@@ -33,4 +33,6 @@
     <string name="student">Student</string>
     <string name="tutor">Tutor</string>
     <string name="save">SAVE</string>
+    <string name="create_a_new_user_profile">Create a new user profile:</string>
+    <string name="tutor_and_student">Tutor and student graphic</string>
 </resources>

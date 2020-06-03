@@ -137,6 +137,5 @@
             android:textColor="@color/design_default_color_on_secondary"
             android:textSize="18sp" />
 
-
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>
