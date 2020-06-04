@@ -36,12 +36,21 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.397" />
 
-    <Spinner
-        android:id="@+id/subject_spinner"
-        android:layout_width="230dp"
+    <TextView
+        android:id="@+id/textViewSubjectResult"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="240dp"/>
+        android:layout_marginTop="240dp"
+        android:hint="@string/your_subject"
+        android:text=""
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.397"/>
 
     <TextView
         android:id="@+id/textViewLocation"

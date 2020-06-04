@@ -12,8 +12,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Looper
 import android.provider.Settings
+import android.util.Log
 import android.widget.*
 import androidx.core.app.ActivityCompat
+import androidx.room.Room
+import com.example.tudors.database.TudorUser
+import com.example.tudors.database.TudorUserDatabase
 import com.google.android.gms.location.*
 
 class MainScreenActivity : AppCompatActivity() {
@@ -25,6 +29,7 @@ class MainScreenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_screen)
 
+        /*
         val spinner: Spinner = findViewById(R.id.subject_spinner)
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter.createFromResource(
@@ -36,6 +41,7 @@ class MainScreenActivity : AppCompatActivity() {
             // Apply the adapter to the spinner
             spinner.adapter = adapter
         }
+         */
 
         // Dylan (5/27/20): Not yet fully functional.
         // Add in https://developer.android.com/guide/topics/ui/controls/spinner#SelectListener
@@ -52,6 +58,34 @@ class MainScreenActivity : AppCompatActivity() {
                 findViewById<TextView>(R.id.textViewLocationResult).text = ""
             }
         }
+
+        // Get instance of database
+        val db = TudorUserDatabase.getInstance(this)
+
+        val thread = Thread {
+            val user = TudorUser()
+            user.userName = "User"
+            user.userPassword = "Password"
+            user.userLocation = "Location"
+            user.userPhone = "0000000000"
+            user.userEmail = "user@email.com"
+            user.isStudent = true
+            user.userSubject = "Math"
+
+            // Uncomment this to populate the database with a dummy user
+            // If left on it will create a new dummy user every run. Wipe data on emulator to clear
+            //db.tudorUserDatabaseDao.insert(user)
+
+            //fetch User
+            val testUser = db.tudorUserDatabaseDao.get(1)
+
+            // Problem, Dylan 6/4/20: Currently doesn't work on first run after wiping data
+            if (testUser != null) {
+                findViewById<TextView>(R.id.textViewSubjectResult).text = testUser.userSubject
+                findViewById<TextView>(R.id.textViewLocationResult).text = testUser.userLocation
+            }
+        }
+        thread.start()
     }
 
     private fun getAddress(lat: Double, lng: Double): String {
