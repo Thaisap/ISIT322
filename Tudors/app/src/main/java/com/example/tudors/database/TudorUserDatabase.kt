@@ -78,7 +78,7 @@ abstract class TudorUserDatabase : RoomDatabase() {
                     instance = Room.databaseBuilder(
                         context.applicationContext,
                         TudorUserDatabase::class.java,
-                        "tudorUser_history_database"
+                        "tudorUserDB"
                     )
                         // Wipes and rebuilds instead of migrating if no Migration object.
                         // You can learn more about migration with Room in this blog post:

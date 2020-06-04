@@ -7,17 +7,25 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import com.example.tudors.databinding.ContentScrollingActivityNewUserScreenBinding
+import com.example.tudors.database.TudorUser
+import com.example.tudors.database.TudorUserDatabase
+import com.example.tudors.databinding.ActivityScrollingNewUserScreenBinding
+
 
 class ScrollingActivityNewUserScreen : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
-    private lateinit var binding: ContentScrollingActivityNewUserScreenBinding
+    private lateinit var binding: ActivityScrollingNewUserScreenBinding
+    private lateinit var subjectSelected: String
+    private var usrID: Long = 0
+    private lateinit var db: TudorUserDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_scrolling_new_user_screen)
 
-        val spinner: Spinner = binding.newUserSubjectSpinner
+        db = TudorUserDatabase.getInstance(applicationContext)
+
+        val spinner: Spinner = binding.scrollView.newUserSubjectSpinner
         spinner.onItemSelectedListener = this
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter.createFromResource(this, R.array.subjects_array,
@@ -27,15 +35,43 @@ class ScrollingActivityNewUserScreen : AppCompatActivity(), AdapterView.OnItemSe
             // Apply the adapter to the spinner
             spinner.adapter = adapter
         }
+
+        binding.scrollView.newUserSaveButton.setOnClickListener {
+            saveNewUserProfile(it)
+        }
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
-        // Another interface callback
-        // TO DO("Not yet implemented")
+        // Use the subject at the top of the list.
+        subjectSelected = parent!!.getItemAtPosition(0).toString()
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         // An item was selected. Save it.
-        var subjectSelected : String = parent!!.getItemAtPosition(position).toString()
+        subjectSelected = parent!!.getItemAtPosition(position).toString()
     }
+
+    private fun saveNewUserProfile(view: View) {
+
+        Thread {
+            val newUser = TudorUser()
+            newUser.userName = binding.scrollView.newUserNameEditText.toString()
+            newUser.userPassword = binding.scrollView.newUserPasswordEditText.toString()
+            newUser.userLocation = binding.scrollView.newUserLocationEditText.toString()
+            newUser.userPhone = binding.scrollView.newUserPhoneEditText.toString()
+            newUser.userEmail = binding.scrollView.newUserEmailEditText.toString()
+            newUser.userSubject = subjectSelected
+            newUser.isStudent = binding.scrollView.newUserStudentRadioButton.isChecked
+
+            db.tudorUserDatabaseDao.insert(newUser)
+
+            val loggedInUser: TudorUser? = db.tudorUserDatabaseDao.login(newUser.userName, newUser.userPassword)
+            if (loggedInUser != null) {
+                usrID = loggedInUser.userId
+            }
+        }.start()
+
+
+    }
+
 }
