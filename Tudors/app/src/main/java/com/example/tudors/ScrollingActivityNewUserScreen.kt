@@ -1,10 +1,12 @@
 package com.example.tudors
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.example.tudors.database.TudorUser
@@ -38,6 +40,8 @@ class ScrollingActivityNewUserScreen : AppCompatActivity(), AdapterView.OnItemSe
 
         binding.scrollView.newUserSaveButton.setOnClickListener {
             saveNewUserProfile(it)
+
+
         }
     }
 
@@ -71,6 +75,9 @@ class ScrollingActivityNewUserScreen : AppCompatActivity(), AdapterView.OnItemSe
             }
         }.start()
 
+        Toast.makeText(this, " Account Created. Please Sign up", Toast.LENGTH_SHORT).show()
+        var intent = Intent(applicationContext, MainActivity::class.java)
+        startActivity(intent)
 
     }
 
