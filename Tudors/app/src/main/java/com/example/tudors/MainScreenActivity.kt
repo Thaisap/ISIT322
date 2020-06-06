@@ -15,6 +15,8 @@ import android.provider.Settings
 import android.util.Log
 import android.widget.*
 import androidx.core.app.ActivityCompat
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import androidx.room.Room
 import com.example.tudors.database.TudorUser
 import com.example.tudors.database.TudorUserDatabase
@@ -24,65 +26,88 @@ class MainScreenActivity : AppCompatActivity() {
 
     val PERMISSION_ID = 42
     lateinit var mFusedLocationClient: FusedLocationProviderClient
+    var usingGPS = false
+
+    // Variables to store the location
+    private var storedLocation = ""
+    var gpsLocation = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_screen)
 
-        /*
-        val spinner: Spinner = findViewById(R.id.subject_spinner)
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter.createFromResource(
-            this, R.array.subjects_array,
-            android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            // Specify the layout to use when the list of choices appears
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            // Apply the adapter to the spinner
-            spinner.adapter = adapter
-        }
-         */
-
-        // Dylan (5/27/20): Not yet fully functional.
-        // Add in https://developer.android.com/guide/topics/ui/controls/spinner#SelectListener
-
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+
+        // Bring over key from MainActivity
+        val primaryKey = intent.getLongExtra("primaryKey", 0L)
+
+        // Populate the subject and location textViews
+        popFields(primaryKey)
 
         val toggle: ToggleButton = findViewById(R.id.btnToggleGPS)
         toggle.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 // The toggle is enabled
+
+                // Store the initial location to be able to switch back to it
+                storedLocation = findViewById<TextView>(R.id.textViewLocationResult).text.toString()
+
+                // Get last location from GPS and fill the location textView with it
                 getLastLocation()
+                usingGPS = true
             } else {
                 // The toggle is disabled
-                findViewById<TextView>(R.id.textViewLocationResult).text = ""
+
+                // Switch back to the stored location from GPS
+                findViewById<TextView>(R.id.textViewLocationResult).text = storedLocation
+                usingGPS = false
             }
         }
 
+        // Touch the Find Matches button
+        findViewById<Button>(R.id.buttonFindMatches).setOnClickListener {
+            findMatch(primaryKey)
+        }
+    }
+
+    private fun popFields(uid: Long) {
         // Get instance of database
         val db = TudorUserDatabase.getInstance(this)
 
         val thread = Thread {
-            val user = TudorUser()
-            user.userName = "User"
-            user.userPassword = "Password"
-            user.userLocation = "Location"
-            user.userPhone = "0000000000"
-            user.userEmail = "user@email.com"
-            user.isStudent = true
-            user.userSubject = "Math"
+            // Fetch User
+            val tudorUser = db.tudorUserDatabaseDao.get(uid)
 
-            // Uncomment this to populate the database with a dummy user
-            // If left on it will create a new dummy user every run. Wipe data on emulator to clear
-            //db.tudorUserDatabaseDao.insert(user)
+            // Display the data
+            if (tudorUser != null) {
+                findViewById<TextView>(R.id.textViewSubjectResult).text = tudorUser.userSubject
+                findViewById<TextView>(R.id.textViewLocationResult).text = tudorUser.userLocation
+                storedLocation = tudorUser.userLocation
+            }
+        }
+        thread.start()
+    }
 
-            //fetch User
-            val testUser = db.tudorUserDatabaseDao.get(1)
+    private fun findMatch(uid: Long) {
+        val db = TudorUserDatabase.getInstance(this)
+        var matches : LiveData<List<TudorUser>>
 
-            // Problem, Dylan 6/4/20: Currently doesn't work on first run after wiping data
-            if (testUser != null) {
-                findViewById<TextView>(R.id.textViewSubjectResult).text = testUser.userSubject
-                findViewById<TextView>(R.id.textViewLocationResult).text = testUser.userLocation
+        val thread = Thread {
+            val tudorUser = db.tudorUserDatabaseDao.get(uid)
+
+            if (tudorUser != null) {
+                var location = ""
+
+                // Use either GPS or stored location
+                if(usingGPS) {
+                    tudorUser.userLocation = gpsLocation
+                } else {
+                    tudorUser.userLocation = storedLocation
+                }
+
+                matches = db.tudorUserDatabaseDao.match(tudorUser.userLocation, tudorUser.userSubject, !tudorUser.isStudent)
+
+                // Insert start activity/setExtra code here when review page is ready
             }
         }
         thread.start()
@@ -91,7 +116,9 @@ class MainScreenActivity : AppCompatActivity() {
     private fun getAddress(lat: Double, lng: Double): String {
         val geocoder = Geocoder(this)
         val list = geocoder.getFromLocation(lat, lng, 1)
-        return list[0].getAddressLine(0)
+        val location = list[0].getAddressLine(0)
+        gpsLocation = location
+        return location
     }
 
     @SuppressLint("MissingPermission")

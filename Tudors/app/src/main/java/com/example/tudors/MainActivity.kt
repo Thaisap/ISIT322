@@ -66,19 +66,18 @@ class MainActivity : AppCompatActivity() {
                 user.userId = loggedInUser.userId
 
             }
+
+            runOnUiThread {
+                run() {
+                    Toast.makeText(this, "You are in the main screen", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            val intent = Intent(applicationContext, MainScreenActivity::class.java)
+            intent.putExtra("primaryKey", user.userId)
+            startActivity(intent)
         }
         thread.start()
-
-        Toast.makeText(this, "You are in the main screen", Toast.LENGTH_SHORT).show()
-
-        val intent = Intent(applicationContext, MainScreenActivity::class.java)
-        intent.putExtra("primaryKey", user.userId)
-        startActivity(intent);
-
-
-
-
     }
-
 }
 

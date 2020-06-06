@@ -59,11 +59,11 @@ class ScrollingActivityNewUserScreen : AppCompatActivity(), AdapterView.OnItemSe
 
         Thread {
             val newUser = TudorUser()
-            newUser.userName = binding.scrollView.newUserNameEditText.toString()
-            newUser.userPassword = binding.scrollView.newUserPasswordEditText.toString()
-            newUser.userLocation = binding.scrollView.newUserLocationEditText.toString()
-            newUser.userPhone = binding.scrollView.newUserPhoneEditText.toString()
-            newUser.userEmail = binding.scrollView.newUserEmailEditText.toString()
+            newUser.userName = binding.scrollView.newUserNameEditText.text.toString()
+            newUser.userPassword = binding.scrollView.newUserPasswordEditText.text.toString()
+            newUser.userLocation = binding.scrollView.newUserLocationEditText.text.toString()
+            newUser.userPhone = binding.scrollView.newUserPhoneEditText.text.toString()
+            newUser.userEmail = binding.scrollView.newUserEmailEditText.text.toString()
             newUser.userSubject = subjectSelected
             newUser.isStudent = binding.scrollView.newUserStudentRadioButton.isChecked
 
