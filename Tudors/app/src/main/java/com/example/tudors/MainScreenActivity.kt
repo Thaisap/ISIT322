@@ -8,16 +8,16 @@ import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.location.Location
 import android.location.LocationManager
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Looper
 import android.provider.Settings
-import android.util.Log
-import android.widget.*
+import android.widget.Button
+import android.widget.TextView
+import android.widget.Toast
+import android.widget.ToggleButton
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
-import androidx.room.Room
 import com.example.tudors.database.TudorUser
 import com.example.tudors.database.TudorUserDatabase
 import com.google.android.gms.location.*
@@ -68,6 +68,18 @@ class MainScreenActivity : AppCompatActivity() {
         findViewById<Button>(R.id.buttonFindMatches).setOnClickListener {
             findMatch(primaryKey)
         }
+
+        // Go to the edit profile activity (added by Ken)
+        findViewById<Button>(R.id.btnEditProfile).setOnClickListener {
+            goToEditProfile(primaryKey)
+        }
+    }
+
+    private fun goToEditProfile(uid: Long) {
+        Toast.makeText(this, "You are on the edit profile screen", Toast.LENGTH_SHORT).show()
+        val intent = Intent(applicationContext, EditProfile::class.java)
+        intent.putExtra("primaryKey", uid)
+        startActivity(intent)
     }
 
     private fun popFields(uid: Long) {

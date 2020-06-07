@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background"
+        tools:context=".EditProfile">
+
+        <ImageView
+            android:id="@+id/logoImage"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="118dp"
+            android:layout_marginTop="29dp"
+            android:layout_marginEnd="93dp"
+            android:contentDescription="@string/tutor_and_student"
+            app:srcCompat="@drawable/mainscreen" />
+
+        <TextView
+            android:id="@+id/editProfileTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="126dp"
+            android:layout_marginTop="225dp"
+            android:text="@string/edit_your_user_profile"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+            android:textSize="18sp" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="250dp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
+                android:id="@+id/editProfileLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/editProfileNameEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/enter_your_name"
+                    android:importantForAutofill="no"
+                    android:inputType="textPersonName"
+                    android:singleLine="true" />
+
+                <EditText
+                    android:id="@+id/editProfilePasswordEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/enter_your_password"
+                    android:importantForAutofill="no"
+                    android:inputType="textVisiblePassword"
+                    android:singleLine="true" />
+
+                <EditText
+                    android:id="@+id/editProfileLocationEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/city_or_town"
+                    android:importantForAutofill="no"
+                    android:inputType="textPostalAddress"
+                    android:singleLine="true" />
+
+                <EditText
+                    android:id="@+id/editProfilePhoneEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/telephone"
+                    android:importantForAutofill="no"
+                    android:inputType="phone"
+                    android:singleLine="true" />
+
+                <EditText
+                    android:id="@+id/editProfileEmailEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/email"
+                    android:importantForAutofill="no"
+                    android:inputType="textEmailAddress"
+                    android:singleLine="true" />
+
+                <TextView
+                    android:id="@+id/editProfileSubjectTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/change_your_subject_here"
+                    android:textAlignment="center"
+                    android:textColor="@color/design_default_color_on_secondary"
+                    android:textSize="18sp" />
+
+                <Spinner
+                    android:id="@+id/editProfileSubjectSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:spinnerMode="dropdown" />
+
+                <View
+                    android:id="@+id/editProfileDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="6dp"
+                    android:background="?android:attr/listDivider" />
+
+                <TextView
+                    android:id="@+id/editProfileRoleTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/change_your_role_here"
+                    android:textAlignment="center"
+                    android:textColor="@color/design_default_color_on_secondary"
+                    android:textSize="18sp" />
+
+                <RadioGroup
+                    android:id="@+id/editProfileRadioGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <RadioButton
+                        android:id="@+id/editProfileStudentRadioButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/student"
+                        android:textColor="@color/design_default_color_on_secondary"
+                        android:textSize="18sp" />
+
+                    <RadioButton
+                        android:id="@+id/editProfileTutorRadioButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tutor"
+                        android:textColor="@color/design_default_color_on_secondary"
+                        android:textSize="18sp" />
+
+                </RadioGroup>
+
+                <Button
+                    android:id="@+id/editProfileSaveButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:background="@android:color/holo_blue_dark"
+                    android:text="@string/save"
+                    android:textAlignment="center"
+                    android:textColor="@color/design_default_color_on_secondary"
+                    android:textSize="18sp" />
+
+                <Button
+                    android:id="@+id/editProfileDeleteButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:background="@android:color/holo_red_light"
+                    android:text="@string/delete_profile"
+                    android:textAlignment="center"
+                    android:textColor="@color/design_default_color_on_secondary"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </RelativeLayout>
+</layout>

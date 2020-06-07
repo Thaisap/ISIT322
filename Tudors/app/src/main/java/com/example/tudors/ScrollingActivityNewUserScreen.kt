@@ -29,6 +29,7 @@ class ScrollingActivityNewUserScreen : AppCompatActivity(), AdapterView.OnItemSe
 
         val spinner: Spinner = binding.scrollView.newUserSubjectSpinner
         spinner.onItemSelectedListener = this
+
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter.createFromResource(this, R.array.subjects_array,
             android.R.layout.simple_spinner_item).also { adapter ->
@@ -39,9 +40,7 @@ class ScrollingActivityNewUserScreen : AppCompatActivity(), AdapterView.OnItemSe
         }
 
         binding.scrollView.newUserSaveButton.setOnClickListener {
-            saveNewUserProfile(it)
-
-
+            saveNewUserProfile()
         }
     }
 
@@ -55,9 +54,8 @@ class ScrollingActivityNewUserScreen : AppCompatActivity(), AdapterView.OnItemSe
         subjectSelected = parent!!.getItemAtPosition(position).toString()
     }
 
-    private fun saveNewUserProfile(view: View) {
-
-        Thread {
+    private fun saveNewUserProfile() {
+        val thread = Thread {
             val newUser = TudorUser()
             newUser.userName = binding.scrollView.newUserNameEditText.text.toString()
             newUser.userPassword = binding.scrollView.newUserPasswordEditText.text.toString()
@@ -70,15 +68,18 @@ class ScrollingActivityNewUserScreen : AppCompatActivity(), AdapterView.OnItemSe
             db.tudorUserDatabaseDao.insert(newUser)
 
             val loggedInUser: TudorUser? = db.tudorUserDatabaseDao.login(newUser.userName, newUser.userPassword)
+
             if (loggedInUser != null) {
                 usrID = loggedInUser.userId
+                runOnUiThread {
+                    run {
+                        Toast.makeText(this, "Account Created. Please sign in now.", Toast.LENGTH_SHORT).show()
+                    }
+                }
             }
-        }.start()
-
-        Toast.makeText(this, " Account Created. Please Sign up", Toast.LENGTH_SHORT).show()
-        var intent = Intent(applicationContext, MainActivity::class.java)
-        startActivity(intent)
-
+            val intent = Intent(applicationContext, MainActivity::class.java)
+            startActivity(intent)
+        }
+        thread.start()
     }
-
 }

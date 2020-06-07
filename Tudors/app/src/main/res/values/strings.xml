@@ -45,4 +45,8 @@
     <string name="login_failed">"Login failed"</string>
     <string name="create_a_new_user_profile">Create a new user profile:</string>
     <string name="tutor_and_student">Tutor and student graphic</string>
+    <string name="edit_your_user_profile">Edit your user profile</string>
+    <string name="change_your_subject_here">Change Your Subject Here</string>
+    <string name="change_your_role_here">Change Your Role Here</string>
+    <string name="delete_profile">DELETE PROFILE</string>
 </resources>
