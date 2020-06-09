@@ -49,4 +49,9 @@
     <string name="change_your_subject_here">Change Your Subject Here</string>
     <string name="change_your_role_here">Change Your Role Here</string>
     <string name="delete_profile">DELETE PROFILE</string>
+    <string name="tutor_name">Tutor Name</string>
+    <string name="tutor_email">Tutor Email</string>
+    <string name="tutor_phone_number">Tutor Phone Number</string>
+    <string name="tutor_subject">Tutor Subject</string>
+    <string name="confirm_match">Confirm Match</string>
 </resources>

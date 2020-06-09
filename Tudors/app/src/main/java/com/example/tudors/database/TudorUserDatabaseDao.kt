@@ -68,7 +68,7 @@ interface TudorUserDatabaseDao {
      */
 
     @Query("SELECT * FROM user_profile_table WHERE user_location = :loc AND user_subject = :subject AND is_student = :isStu ORDER BY userId DESC")
-    fun match(loc: String, subject: String, isStu: Boolean): LiveData<List<TudorUser>>
+    fun match(loc: String, subject: String, isStu: Boolean): List<TudorUser>
 
 }
 

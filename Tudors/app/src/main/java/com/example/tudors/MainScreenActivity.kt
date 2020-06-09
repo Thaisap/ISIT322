@@ -102,7 +102,7 @@ class MainScreenActivity : AppCompatActivity() {
 
     private fun findMatch(uid: Long) {
         val db = TudorUserDatabase.getInstance(this)
-        var matches : LiveData<List<TudorUser>>
+        var matches : List<TudorUser>
 
         val thread = Thread {
             val tudorUser = db.tudorUserDatabaseDao.get(uid)
@@ -119,7 +119,24 @@ class MainScreenActivity : AppCompatActivity() {
 
                 matches = db.tudorUserDatabaseDao.match(tudorUser.userLocation, tudorUser.userSubject, !tudorUser.isStudent)
 
-                // Insert start activity/setExtra code here when review page is ready
+                if(matches.count() != 0) {
+                    runOnUiThread {
+                        run() {
+                            Toast.makeText(this, "You are on the review screen", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+
+                    val intent = Intent(applicationContext, ReviewActivity::class.java)
+                    intent.putExtra("userID", uid)
+                    intent.putExtra("tutorID", matches[0].userId)
+                    startActivity(intent)
+                } else {
+                    runOnUiThread {
+                        run() {
+                            Toast.makeText(this, "No matches found", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
             }
         }
         thread.start()
@@ -128,7 +145,7 @@ class MainScreenActivity : AppCompatActivity() {
     private fun getAddress(lat: Double, lng: Double): String {
         val geocoder = Geocoder(this)
         val list = geocoder.getFromLocation(lat, lng, 1)
-        val location = list[0].getAddressLine(0)
+        val location = list[0].getAddressLine(0).split(',')[1]
         gpsLocation = location
         return location
     }
