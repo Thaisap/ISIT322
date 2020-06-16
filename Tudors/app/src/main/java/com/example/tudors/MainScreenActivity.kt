@@ -17,7 +17,6 @@ import android.widget.Toast
 import android.widget.ToggleButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.lifecycle.LiveData
 import com.example.tudors.database.TudorUser
 import com.example.tudors.database.TudorUserDatabase
 import com.google.android.gms.location.*
@@ -145,7 +144,7 @@ class MainScreenActivity : AppCompatActivity() {
     private fun getAddress(lat: Double, lng: Double): String {
         val geocoder = Geocoder(this)
         val list = geocoder.getFromLocation(lat, lng, 1)
-        val location = list[0].getAddressLine(0).split(',')[1]
+        val location = (list[0].getAddressLine(0).split(',')[1]).trim()
         gpsLocation = location
         return location
     }
